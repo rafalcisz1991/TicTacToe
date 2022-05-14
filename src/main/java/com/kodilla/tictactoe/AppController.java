@@ -13,11 +13,11 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TicTacToeController {
+public class AppController {
 
     Path path = Paths.get("C:/Users/Dell/IdeaProjects/TicTacToe/src/main/resources/files/Wyniki.txt");
 
-    private final Map<String, Square> squares = new HashMap<>();
+    private final Map<String, Squares> squares = new HashMap<>();
     private final Image cross = new Image("files/cross.png", 100, 100,
             false, true);
     private final Image circle = new Image("files/circle.png", 100, 100,
@@ -29,54 +29,54 @@ public class TicTacToeController {
     private boolean didComputerWon;
     private boolean computerMoved;
 
-    private final Scores scores = new Scores(this);
+    private final Scoring scoring = new Scoring(this);
 
-    public TicTacToeController() throws IOException {
+    public AppController() throws IOException {
     }
 
-    public void handleOnMouseClicked(Square square) {
+    public void handleOnMouseClicked(Squares squares) {
         int col;
         int row;
 
         Random random = new Random();
-        scores.readScore();
+        scoring.readScore();
 
         boolean playerMoved = false;
         if (!didPlayerWon && !didComputerWon) {
-            if (!square.getIsSquareUsed()) {
-                square.setFill(new ImagePattern(this.userShape));
-                square.setSquareUsed(true);
-                square.setShape(this.userShape.toString());
+            if (!squares.getIsSquareUsed()) {
+                squares.setFill(new ImagePattern(this.userShape));
+                squares.setSquareUsed(true);
+                squares.setShape(this.userShape.toString());
                 playerMoved = true;
             }
 
             for (int c = 0; c < 3; c++) {
-                if (squares.get(c + "-0").equals(square) && squares.get(c + "-1").equals(square) &&
-                        squares.get(c + "-2").equals(square)) {
+                if (this.squares.get(c + "-0").equals(squares) && this.squares.get(c + "-1").equals(squares) &&
+                        this.squares.get(c + "-2").equals(squares)) {
                     setdidPlayerWon(true);
                     playerWon();
                 }
             }
             for (int r = 0; r < 3; r++) {
-                if (!didPlayerWon && squares.get("0-" + r).equals(square) && squares.get("1-" + r).equals(square) &&
-                        squares.get("2-" + r).equals(square)) {
+                if (!didPlayerWon && this.squares.get("0-" + r).equals(squares) && this.squares.get("1-" + r).equals(squares) &&
+                        this.squares.get("2-" + r).equals(squares)) {
                     setdidPlayerWon(true);
                     playerWon();
                 }
             }
-            if (!didPlayerWon && squares.get("0-0").equals(square) && squares.get("1-1").equals(square) &&
-                    squares.get("2-2").equals(square)) {
+            if (!didPlayerWon && this.squares.get("0-0").equals(squares) && this.squares.get("1-1").equals(squares) &&
+                    this.squares.get("2-2").equals(squares)) {
                 setdidPlayerWon(true);
                 playerWon();
             }
-            if (!didPlayerWon && squares.get("2-0").equals(square) && squares.get("1-1").equals(square) &&
-                    squares.get("0-2").equals(square)) {
+            if (!didPlayerWon && this.squares.get("2-0").equals(squares) && this.squares.get("1-1").equals(squares) &&
+                    this.squares.get("0-2").equals(squares)) {
                 setdidPlayerWon(true);
                 playerWon();
             }
         }
 
-        long freeSquares = squares.values().stream()
+        long freeSquares = this.squares.values().stream()
                 .filter(s -> !s.getIsSquareUsed())
                 .count();
 
@@ -84,7 +84,7 @@ public class TicTacToeController {
             do {
                 col = random.nextInt(3);
                 row = random.nextInt(3);
-                Square computerMove = squares.get(col + "-" + row);
+                Squares computerMove = this.squares.get(col + "-" + row);
 
                 if (!computerMove.getIsSquareUsed()) {
                     computerMove.setFill(new ImagePattern(this.computerShape));
@@ -94,26 +94,26 @@ public class TicTacToeController {
                 }
 
                 for (int c = 0; c < 3; c++) {
-                    if (squares.get(c + "-0").equals(computerMove) && squares.get(c + "-1").equals(computerMove) &&
-                            squares.get(c + "-2").equals(computerMove)) {
+                    if (this.squares.get(c + "-0").equals(computerMove) && this.squares.get(c + "-1").equals(computerMove) &&
+                            this.squares.get(c + "-2").equals(computerMove)) {
                         setdidComputerWon(true);
                         computerWon();
                     }
                 }
                 for (int r = 0; r < 3; r++) {
-                    if (!didComputerWon && squares.get("0-" + r).equals(computerMove) &&
-                            squares.get("1-" + r).equals(computerMove) && squares.get("2-" + r).equals(computerMove)) {
+                    if (!didComputerWon && this.squares.get("0-" + r).equals(computerMove) &&
+                            this.squares.get("1-" + r).equals(computerMove) && this.squares.get("2-" + r).equals(computerMove)) {
                         setdidComputerWon(true);
                         computerWon();
                     }
                 }
-                if (!didComputerWon && squares.get("0-0").equals(computerMove) &&
-                        squares.get("1-1").equals(computerMove) && squares.get("2-2").equals(computerMove)) {
+                if (!didComputerWon && this.squares.get("0-0").equals(computerMove) &&
+                        this.squares.get("1-1").equals(computerMove) && this.squares.get("2-2").equals(computerMove)) {
                     setdidComputerWon(true);
                     computerWon();
                 }
-                if (!didComputerWon && squares.get("2-0").equals(computerMove) &&
-                        squares.get("1-1").equals(computerMove) && squares.get("0-2").equals(computerMove)) {
+                if (!didComputerWon && this.squares.get("2-0").equals(computerMove) &&
+                        this.squares.get("1-1").equals(computerMove) && this.squares.get("0-2").equals(computerMove)) {
                     setdidComputerWon(true);
                     computerWon();
                 }
@@ -124,7 +124,7 @@ public class TicTacToeController {
          if (!didPlayerWon && !didComputerWon && freeSquares == 0) {
             draw();
         }
-        scores.writeFile();
+        scoring.writeFile();
     }
 
     public void savingScore() {
@@ -132,25 +132,25 @@ public class TicTacToeController {
             Date nowDate = new Date();
             writer.write("Data: " + nowDate);
             writer.newLine();
-            writer.write("Zapisuje wynik " + "Gracz:" + scores.getPlayerSavedScore() + " - "
-                    + scores.getComputerSavedScore() + ":komputer");
+            writer.write("Zapisuje wynik " + "Gracz:" + scoring.getPlayerSavedScore() + " - "
+                    + scoring.getComputerSavedScore() + ":komputer");
         } catch(IOException e) {
             System.out.println("wystąpił błąd: " + e);
         }
     }
 
     private void playerWon() {
-        BoxesCreator.showEndBox( "You won!");
-        scores.setPlayerWon();
+        BoxCreator.showEndBox( "You won!");
+        scoring.setPlayerWon();
     }
 
     private void computerWon() {
-        BoxesCreator.showEndBox("Computer won!");
-        scores.setComputerWon();
+        BoxCreator.showEndBox("Computer won!");
+        scoring.setComputerWon();
     }
 
     private void draw() {
-        BoxesCreator.showEndBox("Draw");
+        BoxCreator.showEndBox("Draw");
     }
 
     public Image getCross() {
@@ -169,8 +169,8 @@ public class TicTacToeController {
         this.computerShape = computerShape;
     }
 
-    void addSquare(String coordinates, Square square) {
-        squares.put(coordinates, square);
+    void addSquare(String coordinates, Squares squares) {
+        this.squares.put(coordinates, squares);
     }
 
     public void setdidPlayerWon(boolean didPlayerWon) {
@@ -181,7 +181,7 @@ public class TicTacToeController {
         this.didComputerWon = didComputerWon;
     }
 
-    public Scores getScores() {
-        return scores;
+    public Scoring getScores() {
+        return scoring;
     }
 }
