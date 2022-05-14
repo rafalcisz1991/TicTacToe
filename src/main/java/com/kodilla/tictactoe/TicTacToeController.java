@@ -40,8 +40,6 @@ public class TicTacToeController {
 
         Random random = new Random();
         scores.readScore();
-        int playerScore = scores.getPlayerSavedScore();
-        int computerScore = scores.getComputerSavedScore();
 
         boolean playerMoved = false;
         if (!didPlayerWon && !didComputerWon) {
@@ -136,10 +134,8 @@ public class TicTacToeController {
             writer.newLine();
             writer.write("Zapisuje wynik " + "Gracz:" + scores.getPlayerSavedScore() + "-"
                     + scores.getComputerSavedScore() + ":komputer");
-
-        } catch(IOException e)
-        {
-            System.out.println("wystąpił błąd: " + e);
+        } catch(IOException e) {
+        System.out.println("wystąpił błąd: " + e);
         }
     }
 
