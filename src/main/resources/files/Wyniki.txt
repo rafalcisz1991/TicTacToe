@@ -1,0 +1,2 @@
+Data: Sat May 14 22:49:51 CEST 2022
+Zapisuje wynik Gracz:2-0:komputer
