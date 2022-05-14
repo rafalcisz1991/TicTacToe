@@ -35,7 +35,7 @@ public class TicTacToeController {
     }
 
     public void handleOnMouseClicked(Square square) {
-        int col;
+        int column;
         int row;
 
         Random random = new Random();
@@ -82,9 +82,9 @@ public class TicTacToeController {
 
         if (!didComputerWon && !didPlayerWon && playerMoved && freeSquares > 0) {
             do {
-                col = random.nextInt(3);
+                column = random.nextInt(3);
                 row = random.nextInt(3);
-                Square computerMove = squares.get(col + "-" + row);
+                Square computerMove = squares.get(column + "-" + row);
 
                 if (!computerMove.getIsSquareUsed()) {
                     computerMove.setFill(new ImagePattern(this.computerShape));
