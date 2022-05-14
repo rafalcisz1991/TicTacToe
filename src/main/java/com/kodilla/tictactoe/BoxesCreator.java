@@ -34,7 +34,7 @@ public class BoxesCreator {
         endWindow.showAndWait();
     }
 
-    public static void createDisplayBox(TicTacToeController controller) {
+    public static void createDisplayBox(AppController controller) {
         Stage window = new Stage();
         window.setHeight(500);
         window.setWidth(500);

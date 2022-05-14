@@ -28,7 +28,7 @@ public class TicTacToeApp extends Application {
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);
 
-        TicTacToeController controller = new TicTacToeController();
+        AppController controller = new AppController();
 
         BoxesCreator.createDisplayBox(controller);
 

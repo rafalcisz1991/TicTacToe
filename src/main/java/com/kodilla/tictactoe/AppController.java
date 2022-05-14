@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 
-public class TicTacToeController {
+public class AppController {
 
     Path path = Paths.get("C:/Users/Dell/IdeaProjects/TicTacToe/src/main/resources/files/Wyniki.txt");
 
@@ -31,7 +31,7 @@ public class TicTacToeController {
 
     private final Scores scores = new Scores(this);
 
-    public TicTacToeController() throws IOException {
+    public AppController() throws IOException {
     }
 
     public void handleOnMouseClicked(Square square) {
@@ -127,9 +127,9 @@ public class TicTacToeController {
     }
 
     public void savingScore() {
-        try(BufferedWriter writer = Files.newBufferedWriter(path))
-        {
+        try(BufferedWriter writer = Files.newBufferedWriter(path)) {
             Date nowDate = new Date();
+            writer.newLine();
             writer.write("Data: " + nowDate);
             writer.newLine();
             writer.write("Zapisuje wynik " + "Gracz:" + scores.getPlayerSavedScore() + "-"

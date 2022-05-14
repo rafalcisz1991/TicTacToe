@@ -9,19 +9,19 @@ public class Square extends Rectangle {
 
     private static final int INITIAL_SIZE = 80;
     private int column, row;
-    private final TicTacToeController ticTacToeController;
+    private final AppController appController;
 
     private boolean isSquareUsed;
     private String shape;
 
-    public Square(int column, int row, Paint fill, TicTacToeController ticTacToeController, String shape) {
+    public Square(int column, int row, Paint fill, AppController appController, String shape) {
         super(INITIAL_SIZE, INITIAL_SIZE, fill);
         this.column = column;
         this.row = row;
-        this.ticTacToeController = ticTacToeController;
+        this.appController = appController;
         this.isSquareUsed = false;
         this.shape = shape;
-        this.setOnMouseClicked(event -> ticTacToeController.handleOnMouseClicked(this));
+        this.setOnMouseClicked(event -> appController.handleOnMouseClicked(this));
     }
 
     public boolean getIsSquareUsed() {
