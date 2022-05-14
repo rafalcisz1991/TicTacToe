@@ -3,19 +3,18 @@ package com.kodilla.tictactoe;
 import java.io.*;
 import java.util.Objects;
 
-public class Scoring {
+public class Scores {
 
     private int playerSavedScore;
     private int computerSavedScore;
-    private final AppController appController;
+    private final TicTacToeController ticTacToeController;
 
     private final ClassLoader classLoader = getClass().getClassLoader();
 
-    private final File scores = new File(Objects.requireNonNull(classLoader.
-            getResource("files/Scores.txt")).getFile());
+    private final File scores = new File(Objects.requireNonNull(classLoader.getResource("files/Scores.txt")).getFile());
 
-    public Scoring(AppController appController) {
-        this.appController = appController;
+    public Scores(TicTacToeController ticTacToeController) {
+        this.ticTacToeController = ticTacToeController;
         readScore();
     }
 
@@ -30,7 +29,7 @@ public class Scoring {
     }
 
     public void writeFile(){
-        writeFile(playerSavedScore+" - "+computerSavedScore);
+        writeFile(playerSavedScore+"-"+computerSavedScore);
     }
 
     public void writeFile(String value) {

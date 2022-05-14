@@ -5,24 +5,23 @@ import javafx.scene.shape.Rectangle;
 
 import java.util.Objects;
 
-public class Squares extends Rectangle {
+public class Square extends Rectangle {
 
     private static final int INITIAL_SIZE = 80;
     private int column, row;
-    private final AppController appController;
+    private final TicTacToeController ticTacToeController;
 
     private boolean isSquareUsed;
     private String shape;
 
-    public Squares(int column, int row, Paint fill, AppController appController, String shape) {
+    public Square(int column, int row, Paint fill, TicTacToeController ticTacToeController, String shape) {
         super(INITIAL_SIZE, INITIAL_SIZE, fill);
         this.column = column;
         this.row = row;
-        this.appController = appController;
+        this.ticTacToeController = ticTacToeController;
         this.isSquareUsed = false;
         this.shape = shape;
-
-        this.setOnMouseClicked(event -> appController.handleOnMouseClicked(this));
+        this.setOnMouseClicked(event -> ticTacToeController.handleOnMouseClicked(this));
     }
 
     public boolean getIsSquareUsed() {
@@ -42,9 +41,9 @@ public class Squares extends Rectangle {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Squares squares = (Squares) o;
+        Square square = (Square) o;
 
-        if (isSquareUsed != squares.isSquareUsed) return false;
-        return Objects.equals(shape, squares.shape);
+        if (isSquareUsed != square.isSquareUsed) return false;
+        return Objects.equals(shape, square.shape);
     }
 }

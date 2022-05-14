@@ -10,7 +10,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-public class BoxCreator {
+public class BoxesCreator {
 
     public static void showEndBox(String winning) {
         Stage endWindow = new Stage();
@@ -34,7 +34,7 @@ public class BoxCreator {
         endWindow.showAndWait();
     }
 
-    public static void createDisplayBox(AppController controller) {
+    public static void createDisplayBox(TicTacToeController controller) {
         Stage window = new Stage();
         window.setHeight(500);
         window.setWidth(500);

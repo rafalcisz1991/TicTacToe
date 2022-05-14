@@ -28,9 +28,9 @@ public class TicTacToeApp extends Application {
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
         Background background = new Background(backgroundImage);
 
-        AppController controller = new AppController();
+        TicTacToeController controller = new TicTacToeController();
 
-        BoxCreator.createDisplayBox(controller);
+        BoxesCreator.createDisplayBox(controller);
 
         GridPane grid = new GridPane();
         grid.setBackground(background);
@@ -42,9 +42,9 @@ public class TicTacToeApp extends Application {
 
         for (int col = 0; col < 3; col++) {
             for (int row = 0; row < 3; row++) {
-                Squares squares = new Squares(col, row, Color.TRANSPARENT, controller, null);
-                grid.add(squares, col, row);
-                controller.addSquare(col + "-" + row, squares);
+                Square square = new Square(col, row, Color.TRANSPARENT, controller, null);
+                grid.add(square, col, row);
+                controller.addSquare(col + "-" + row, square);
             }
         }
 
