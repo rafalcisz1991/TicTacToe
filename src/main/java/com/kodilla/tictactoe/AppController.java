@@ -18,9 +18,9 @@ public class AppController {
     Path path = Paths.get("C:/Users/Dell/IdeaProjects/TicTacToe/src/main/resources/files/Wyniki.txt");
 
     private final Map<String, Square> squares = new HashMap<>();
-    private final Image cross = new Image("files/cross1.png", 100, 100,
+    private final Image cross = new Image("files/cross.png", 100, 100,
             false, true);
-    private final Image circle = new Image("files/nought1.png", 100, 100,
+    private final Image circle = new Image("files/circle.png", 100, 100,
             false, true);
     private Image userShape;
     private Image computerShape;
@@ -31,7 +31,7 @@ public class AppController {
 
     private final Scores scores = new Scores(this);
 
-    public AppController() throws IOException {
+    public AppController() {
     }
 
     public void handleOnMouseClicked(Square square) {
@@ -126,7 +126,7 @@ public class AppController {
         scores.writeFile();
     }
 
-    public void savingScore() {
+    public void savingScore() throws IOException  {
         try(BufferedWriter writer = Files.newBufferedWriter(path)) {
             Date nowDate = new Date();
             writer.newLine();
