@@ -1,3 +1,7 @@
+0 - 0
 
-Data: Sat May 14 23:32:55 CEST 2022
-Zapisuje wynik Gracz:0-0:komputer
+Data: Fri Jun 17 22:16:47 CEST 2022
+Zapisuje wynik Gracz 3 -- 1 komputer
+
+Data: Fri Jun 17 22:23:39 CEST 2022
+Zapisuje wynik Gracz 7 -- 1 komputer

@@ -4,8 +4,8 @@ import javafx.scene.image.Image;
 import javafx.scene.paint.ImagePattern;
 
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Date;
@@ -15,7 +15,7 @@ import java.util.Random;
 
 public class AppController {
 
-    Path path = Paths.get("C:/Users/Dell/IdeaProjects/TicTacToe/src/main/resources/files/Wyniki.txt");
+    private final Path path = Paths.get("C:/Users/Dell/IdeaProjects/TicTacToe/src/main/resources/files/Wyniki.txt");
 
     private final Map<String, Square> squares = new HashMap<>();
     private final Image cross = new Image("files/cross.png", 100, 100,
@@ -34,12 +34,11 @@ public class AppController {
     public AppController() {
     }
 
-    public void handleOnMouseClicked(Square square) {
+    public void handleOnMouseClicked(Square square) throws IOException{
         int column;
         int row;
 
         Random random = new Random();
-        scores.readScore();
 
         boolean playerMoved = false;
         if (!didPlayerWon && !didComputerWon) {
@@ -123,17 +122,17 @@ public class AppController {
         if (!didPlayerWon && !didComputerWon && freeSquares == 0) {
             draw();
         }
-        scores.writeFile();
     }
 
     public void savingScore() throws IOException  {
-        try(BufferedWriter writer = Files.newBufferedWriter(path)) {
+        try(BufferedWriter outputWriter = new BufferedWriter(new FileWriter(String.valueOf(path), true))) {
             Date nowDate = new Date();
-            writer.newLine();
-            writer.write("Data: " + nowDate);
-            writer.newLine();
-            writer.write("Zapisuje wynik " + "Gracz:" + scores.getPlayerSavedScore() + "-"
-                    + scores.getComputerSavedScore() + ":komputer");
+            outputWriter.newLine();
+            outputWriter.write("Data: " + nowDate);
+            outputWriter.newLine();
+            outputWriter.write("Zapisuje wynik " + "Gracz " + scores.getPlayerSavedScore() + " -- "
+                        + scores.getComputerSavedScore() + " komputer");
+            outputWriter.newLine();
         } catch(IOException e) {
         System.out.println("wystąpił błąd: " + e);
         }

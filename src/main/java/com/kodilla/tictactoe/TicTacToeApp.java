@@ -8,8 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.image.Image;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import java.io.IOException;
 
 public class TicTacToeApp extends Application {
 
@@ -22,7 +22,7 @@ public class TicTacToeApp extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        BackgroundSize backgroundSize = new BackgroundSize(1000, 1000,
+        BackgroundSize backgroundSize = new BackgroundSize(800, 800,
                 false, false, false, false);
         BackgroundImage backgroundImage = new BackgroundImage(imageback, BackgroundRepeat.REPEAT,
                 BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, backgroundSize);
@@ -50,11 +50,11 @@ public class TicTacToeApp extends Application {
 
         primaryStage.setTitle("My own Tic Tac Toe app");
         primaryStage.setHeight(700);
-        primaryStage.setWidth(1000);
+        primaryStage.setWidth(700);
 
         Button newGameButton = new Button();
         newGameButton.setText("Launch new game");
-        newGameButton.setAlignment(Pos.BASELINE_CENTER);
+        newGameButton.setAlignment(Pos.BOTTOM_RIGHT);
         newGameButton.setOnAction(e -> {
             TicTacToeApp app = new TicTacToeApp();
             try {
@@ -64,17 +64,27 @@ public class TicTacToeApp extends Application {
             }
         });
 
-        BorderPane border = new BorderPane();
-        border.setBottom(new Text(controller.getScores().toString()));
-        border.setCenter(grid);
-        border.setTop(newGameButton);
+        Button cancelButton = new Button();
+        cancelButton.setText("Exit game and save scores");
+        cancelButton.setOnAction(event -> {
+            try {
+                controller.savingScore();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            primaryStage.close();
+        });
 
-        Scene scene = new Scene(border, 500, 500);
+        BorderPane border = new BorderPane();
+        border.setCenter(grid);
+        border.setBottom(newGameButton);
+        border.setTop(cancelButton);
+
+        Scene scene = new Scene(border, 1000, 1000);
 
         primaryStage.resizableProperty().setValue(Boolean.FALSE);
         primaryStage.setScene(scene);
         primaryStage.show();
-        controller.savingScore();
     }
 
     public static void display() {

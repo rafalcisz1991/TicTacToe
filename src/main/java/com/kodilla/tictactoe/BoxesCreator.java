@@ -19,7 +19,7 @@ public class BoxesCreator {
         Button winningButton = new Button();
         winningButton.setText(winning);
         winningButton.setAlignment(Pos.CENTER);
-        HBox.setMargin(winningButton, new Insets(5));
+        HBox.setMargin(winningButton, new Insets(10));
         winningButton.setOnAction(e -> {
             endWindow.close();
         });

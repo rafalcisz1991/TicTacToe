@@ -3,6 +3,7 @@ package com.kodilla.tictactoe;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Rectangle;
 
+import java.io.IOException;
 import java.util.Objects;
 
 public class Square extends Rectangle {
@@ -21,7 +22,13 @@ public class Square extends Rectangle {
         this.appController = appController;
         this.isSquareUsed = false;
         this.shape = shape;
-        this.setOnMouseClicked(event -> appController.handleOnMouseClicked(this));
+        this.setOnMouseClicked(event -> {
+            try {
+                appController.handleOnMouseClicked(this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
     }
 
     public boolean getIsSquareUsed() {
